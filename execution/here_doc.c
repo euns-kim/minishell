@@ -6,28 +6,11 @@
 /*   By: tmarts <tmarts@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:34:55 by tmarts            #+#    #+#             */
-/*   Updated: 2023/07/28 17:58:27 by tmarts           ###   ########.fr       */
+/*   Updated: 2023/07/28 18:34:17 by tmarts           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-static int	ft_str_same(const char *s1, const char *s2, size_t len_s1)
-{
-	if (len_s1 == 0)
-		return (0);
-	if (ft_strlen(s2) != len_s1)
-		return (1);
-	while (len_s1 > 0 && *s1 == *s2 && *s1 != 0 && *s2 != 0)
-	{
-		len_s1--;
-		s1++;
-		s2++;
-	}
-	if (len_s1 == 0 && *s2 == 0)
-		return (0);
-	return (1);
-}
 
 static int	here_doc(char *delimiter)
 {
@@ -37,14 +20,12 @@ static int	here_doc(char *delimiter)
 	here_doc_fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (here_doc_fd == -1)
 		return (announce_error("heredoc", "Failed to open file", 2), -1);
-	// ft_putstr_fd("> ", STDOUT_FILENO);
-	line = get_next_line(STDIN_FILENO);
-	while (line && ft_str_same(line, delimiter, (ft_strlen(line) - 1)) != 0)
+	line = readline("> ");
+	while (line && ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1) != 0)
 	{
-		ft_putstr_fd(line, here_doc_fd);
+		ft_putendl_fd(line, here_doc_fd);
 		free(line);
-		// ft_putstr_fd("> ", STDOUT_FILENO);
-		line = get_next_line(STDIN_FILENO);
+		line = readline("> ");
 	}
 	free(line);
 	close(here_doc_fd);

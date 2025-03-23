@@ -6,7 +6,7 @@
 /*   By: tmarts <tmarts@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:09:17 by tmarts            #+#    #+#             */
-/*   Updated: 2023/07/28 18:17:54 by tmarts           ###   ########.fr       */
+/*   Updated: 2023/07/28 18:23:19 by tmarts           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int		initiate_var_list(t_var_list **var_list);
 void	free_var_list(t_var_list *var_list);
 void	ft_lstadd_back_ms(t_var_list **var_list, t_var_list *new);
 
-// void	set_signals(void);
-// void	set_signals_child(void);
-// void	set_termios(int mode);
+void	set_signals(void);
+void	set_signals_child(void);
+void	set_termios(int mode);
 
 #endif

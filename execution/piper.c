@@ -6,7 +6,7 @@
 /*   By: tmarts <tmarts@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:41:50 by tmarts            #+#    #+#             */
-/*   Updated: 2023/07/28 18:17:37 by tmarts           ###   ########.fr       */
+/*   Updated: 2023/07/28 18:36:02 by tmarts           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ t_exec_exit_code	piper(t_minishell *ms_data, t_parser *parser_data)
 	t_piper	piper;
 
 	i = -1;
-	// set_signals_child();
+	set_signals_child();
 	if (init_piper_data(parser_data, &piper) != 0)
-		return (internal_error_printer("Malloc failed"), MALLOC_ERROR);
+		return (internal_error_printer("Malloc failed"), EXEC_MALLOC_ERROR);
 	while (++i <= piper.fork_count - 1)
 	{
 		if (i < piper.fork_count - 1 && \
@@ -96,7 +96,7 @@ t_exec_exit_code	piper(t_minishell *ms_data, t_parser *parser_data)
 		close_used_pipes_and_fds(&piper);
 	}
 	ft_waiting(piper.pids, piper.fork_count);
-	// set_signals();
+	set_signals();
 	if (g_exit_code != 0)
 		return (free(piper.pids), EXEC_FAIL);
 	return (free(piper.pids), EXEC_SUCCESS);

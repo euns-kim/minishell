@@ -6,7 +6,7 @@
 /*   By: tmarts <tmarts@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:19:17 by tmarts            #+#    #+#             */
-/*   Updated: 2023/07/27 23:41:09 by tmarts           ###   ########.fr       */
+/*   Updated: 2023/07/28 19:26:01 by tmarts           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,14 @@ int	initiate_var_list(t_var_list **var_list)
 	i = 0;
 	while (environ[i] != NULL)
 	{
-		new_var_node = make_new_node(environ[i]);
-		if (!new_var_node)
-			return (free_var_list(*var_list), \
-				internal_error_printer("Malloc failed"), 1);
-		ft_lstadd_back_ms(var_list, new_var_node);
+		if (ft_strncmp(environ[i], "OLDPWD", 6) != 0)
+		{
+			new_var_node = make_new_node(environ[i]);
+			if (!new_var_node)
+				return (free_var_list(*var_list), \
+					internal_error_printer("Malloc failed"), 1);
+			ft_lstadd_back_ms(var_list, new_var_node);
+		}
 		i++;
 	}
 	return (add_oldpwd_node(var_list));

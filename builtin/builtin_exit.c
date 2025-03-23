@@ -6,7 +6,7 @@
 /*   By: tmarts <tmarts@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:34:18 by tmarts            #+#    #+#             */
-/*   Updated: 2023/07/27 22:08:14 by tmarts           ###   ########.fr       */
+/*   Updated: 2023/07/28 18:22:07 by tmarts           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	builtin_exit(t_minishell *ms_data, char **cmd)
 	long long int	exit_local;
 	int				arg_count;
 
-	// ft_putendl_fd("exit", 1);
+	ft_putendl_fd("exit", 1);
 	arg_count = get_arg_count(cmd);
 	if (arg_count == 1)
 		exit_local = ms_data->prev_exit;
