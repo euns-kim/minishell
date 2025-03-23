@@ -27,7 +27,8 @@ NAME			:= minishell
 CFLAGS 			:= -Wall -Wextra -Werror
 # -g3 -fsanitize=address
 
-WHEREIS_BREW	:= if test -d $(HOME)/.brew/opt/readline; then echo $(HOME)/.brew; \
+WHEREIS_BREW	:= if test -d /usr/local/opt/readline; then echo /usr/local; \
+					elif test -d $(HOME)/.brew/opt/readline; then echo $(HOME)/.brew; \
 					elif test -d $(HOME)/goinfre/.brew/opt/readline; then echo $(HOME)/goinfre/.brew; \
 					elif test -d $(HOME)/homebrew/opt/readline; then echo $(HOME)/homebrew; \
 					else echo ""; fi		
